@@ -1,54 +1,30 @@
 pipeline {
     agent any
-
+    
     stages {
+        stage('Checkout') {
+            steps {
+                checkout scm
+            }
+        }
         stage('Build') {
             steps {
-                // Get some code from a GitHub repository
-                git 'https://github.com/sonam-niit/PetsClinic.git'
-
-                // Run Maven Wrapper Commands
-                sh "./mvnw compile"
-
-                echo 'Building the Project with maven compile'
+                sh 'mvn clean install'
             }
         }
-
         stage('Test') {
             steps {
-
-                // Run Maven Wrapper Commands
-                sh "./mvnw test"
-
-                echo 'Testing the Project with maven test'
+                sh 'mvn test'
             }
         }
-
         stage('Package') {
             steps {
-
-                // Run Maven Wrapper Commands
-                sh "./mvnw package"
-
-                echo 'Packaging the Project with maven package'
-            }
-        }
-        stage('Containerize') {
-            steps {
-
-                // Run Maven Wrapper Commands
-                sh "docker build -t myapp ."
-
-                echo 'Containerizing the App with Docker'
+                sh 'mvn package'
             }
         }
         stage('Deploy') {
             steps {
-
-                // Run Maven Wrapper Commands
-                sh "docker run -d -p 9090:9090 myapp"
-
-                echo 'Deploy the App with Docker'
+                sh 'java -jar target/*.jar'
             }
         }
     }
