@@ -31,7 +31,7 @@ pipeline {
             //sh 'docker rm -f pets-container || true'
             
             // Run the Docker container
-            sh "docker run --name pets-container -d -p 9090:9090 myapp"
+            sh "docker run --name pets-container --network project -d -p 9090:9090 myapp"
             
             echo 'Deploy the App with Docker'
         }
