@@ -28,7 +28,7 @@ pipeline {
             }
             
             // Remove the container if it exists
-            sh 'docker rm -f pets-container || true'
+            //sh 'docker rm -f pets-container || true'
             
             // Run the Docker container
             sh "docker run --name pets-container -d -p 9090:9090 myapp"
