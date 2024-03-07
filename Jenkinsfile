@@ -20,12 +20,12 @@ pipeline {
     steps {
         script {
             // Check if the container is already running
-            def isRunning = sh(script: 'docker ps -q -f name=pets-container', returnStatus: true)
-            if (isRunning == 0) {
-                echo 'Pets container is already running. Stopping it...'
+            //def isRunning = sh(script: 'docker ps -q -f name=pets-container', returnStatus: true)
+            //if (isRunning == 0) {
+              //  echo 'Pets container is already running. Stopping it...'
                 // Stop the container if it's running
-                sh 'docker stop pets-container'
-            }
+               // sh 'docker stop pets-container'
+           // }
             
             // Remove the container if it exists
             //sh 'docker rm -f pets-container || true'
